@@ -32,7 +32,7 @@ flowchart TD
             huang_data[Huang Lab Data]
             propedia_data[Propedia Data]
             yapp_data[YAPP-Cd]
-            huang_data --> preprocess_train_data{{Preprocess Binding Data}}
+            huang_data --> preprocess_train_data{{Prepare Binding Training Set}}
             propedia_data --> preprocess_train_data
             yapp_data --> preprocess_train_data
             preprocess_train_data --> binding_sequences[Binding Sequences]
