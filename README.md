@@ -1,6 +1,6 @@
 # Peptriever - Official Implementation
 
-![CI](https://github.com/RoniGurvich/Peptriever/actions/workflows/ci.yml/badge.svg)
+[![CI](https://github.com/RoniGurvich/Peptriever/actions/workflows/ci.yml/badge.svg)](https://github.com/RoniGurvich/Peptriever/actions/workflows/ci.yml)
 
 ## Model Architecture
 
