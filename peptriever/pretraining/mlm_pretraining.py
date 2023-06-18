@@ -44,8 +44,9 @@ def pretrain_mlm_single_model(config, mlm_config: MLMConfig, model_name, max_len
         config, max_length=max_length, resume_training=mlm_config.resume_training
     )
 
+    model_path = config.models_dir / model_name
     trainer_args = TrainingArguments(
-        output_dir=config.models_dir / model_name,
+        output_dir=model_path,
         do_train=True,
         do_eval=True,
         overwrite_output_dir=True,
@@ -88,7 +89,8 @@ def pretrain_mlm_single_model(config, mlm_config: MLMConfig, model_name, max_len
         trainer.train()
     except KeyboardInterrupt:
         print("Stopped manually")
-    trainer.save_model(output_dir=config.models_dir / model_name)
+
+    model.save_pretrained(output_dir=model_path)
 
 
 def get_model(config, max_length, resume_training: Optional[str]):
