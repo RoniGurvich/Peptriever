@@ -17,9 +17,9 @@ from peptriever.reproducibility import set_seed
 @dataclass
 class MLMConfig:
     batch_size: int = 24
-    epochs: int = 10
+    epochs: int = 20
     lr: float = 1e-5
-    steps_interval: int = 5_000
+    steps_interval: int = 10_000
     resume_training: Optional[str] = None
     n_workers: int = os.cpu_count() or 1
 
@@ -91,7 +91,7 @@ def pretrain_mlm_single_model(config, mlm_config: MLMConfig, model_name, max_len
     except KeyboardInterrupt:
         print("Stopped manually")
 
-    model.save_pretrained(output_dir=model_path)
+    model.save_pretrained(model_path)
 
 
 def get_model(config, max_length, resume_training: Optional[str]):
