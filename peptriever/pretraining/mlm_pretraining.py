@@ -11,6 +11,7 @@ from peptriever.acceleration import compile_model
 from peptriever.pretraining.config import PretrainingConfig
 from peptriever.pretraining.load_tokenizer import load_local_tokenizer
 from peptriever.pretraining.mlm_dataset import MLMCollator, MaskedLMDataset
+from peptriever.reproducibility import set_seed
 
 
 @dataclass
@@ -39,7 +40,7 @@ def pretrain_mlm_multiple_models(config: PretrainingConfig, mlm_config: MLMConfi
 
 
 def pretrain_mlm_single_model(config, mlm_config: MLMConfig, model_name, max_length):
-    torch.manual_seed(999)
+    set_seed(seed=999)
     model = get_model(
         config, max_length=max_length, resume_training=mlm_config.resume_training
     )

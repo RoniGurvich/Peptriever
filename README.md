@@ -50,9 +50,9 @@ flowchart TD
     end
     
     subgraph training[Training]
-        pretrained_mlm --> train_siamese{{Train Siamese Transformers}}
-        binding_sequences --> train_siamese
-        train_siamese --> trained_model[Trained Model]
+        pretrained_mlm --> finetune{{Finetune Models}}
+        binding_sequences --> finetune
+        finetune --> trained_model[Trained Model]
         click trained_model "https://huggingface.co/ronig/siamese_protein_bert" "huggingface model"
     end
     
