@@ -4,15 +4,15 @@ from transformers.models.bert.modeling_bert import BertOnlyMLMHead
 from peptriever.model.bert_embedding import BertEmbeddingConfig, BertForEmbedding
 
 
-class PeptrieverConfig(BertEmbeddingConfig):
+class BiEncoderConfig(BertEmbeddingConfig):
     max_length1: int
     max_length2: int
 
 
-class Peptriever(PreTrainedModel):
-    config_class = PeptrieverConfig
+class BiEncoder(PreTrainedModel):
+    config_class = BiEncoderConfig
 
-    def __init__(self, config: PeptrieverConfig):
+    def __init__(self, config: BiEncoderConfig):
         super().__init__(config)
         config1 = _replace_max_length(config, "max_length1")
         self.bert1 = BertForEmbedding(config1)
@@ -34,10 +34,10 @@ class Peptriever(PreTrainedModel):
         return y1
 
 
-class PeptrieverWithMaskedLM(PreTrainedModel):
-    config_class = PeptrieverConfig
+class BiEncoderWithMaskedLM(PreTrainedModel):
+    config_class = BiEncoderConfig
 
-    def __init__(self, config: PeptrieverConfig):
+    def __init__(self, config: BiEncoderConfig):
         super().__init__(config=config)
         config1 = _replace_max_length(config, "max_length1")
         self.bert1 = BertForEmbedding(config1)

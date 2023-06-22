@@ -18,7 +18,7 @@ from peptriever.finetuning.peptriever_trainiing_session import (
     SessionParams,
 )
 from peptriever.model.bert_embedding import BertEmbeddingConfig, BertForEmbedding
-from peptriever.model.peptriever import PeptrieverConfig, PeptrieverWithMaskedLM
+from peptriever.model.bi_encoder import BiEncoderConfig, BiEncoderWithMaskedLM
 
 
 @dataclass
@@ -134,10 +134,10 @@ def setup_model(
         )
 
     bert_config = _get_bert_config(config, tokenizer)
-    model = PeptrieverWithMaskedLM(config=bert_config)
+    model = BiEncoderWithMaskedLM(config=bert_config)
     if resume_training is not None:
         full_path = config.models_path / resume_training
-        model = PeptrieverWithMaskedLM.from_pretrained(str(full_path))
+        model = BiEncoderWithMaskedLM.from_pretrained(str(full_path))
 
     if pretrained_weights is not None:
         pretrain_path1 = str(config.models_path / pretrained_weights[0])
@@ -167,7 +167,7 @@ def load_bert_embeddings_from_mlm_pretrained(
 
 def _get_bert_config(config: FinetuningConfig, tokenizer: PreTrainedTokenizerFast):
     bert_vocab_size = len(tokenizer.all_special_tokens) + tokenizer.vocab_size
-    return PeptrieverConfig(
+    return BiEncoderConfig(
         vocab_size=bert_vocab_size,
         max_length1=config.tokenizer1_max_length,
         max_length2=config.tokenizer2_max_length,

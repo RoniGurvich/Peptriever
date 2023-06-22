@@ -11,7 +11,7 @@ from transformers import AutoTokenizer
 
 from peptriever.acceleration import get_device
 from peptriever.finetuning.config import FinetuningConfig
-from peptriever.model.peptriever import Peptriever
+from peptriever.model.bi_encoder import BiEncoder
 from peptriever.pdb_seq_lookup import get_pdb_lookup
 
 
@@ -60,7 +60,7 @@ def evaluate_binding(config: FinetuningConfig, model_name: str):
 def load_pretrained_model_and_tokenizer(config, model_name):
     tokenizer = AutoTokenizer.from_pretrained(config.hf_tokenizer_repo)
     full_path = config.models_path / model_name
-    model = Peptriever.from_pretrained(full_path)
+    model = BiEncoder.from_pretrained(full_path)
     model.eval()
     device = get_device()
     model = model.to(device)

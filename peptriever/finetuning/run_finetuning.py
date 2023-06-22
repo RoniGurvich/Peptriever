@@ -12,8 +12,8 @@ def run_finetuning():
         config=config,
         train_params=TrainParams(
             pretrained_weights=(
-                "base_protein_30_2023-06-17T19:30:56.000452",
-                "base_protein_300_2023-06-17T19:30:56.000452",
+                "base_protein_30_2023-06-20T19:29:45.880208",
+                "base_protein_300_2023-06-20T19:29:45.880208",
             ),
             epochs=80,
             warmup=10,
