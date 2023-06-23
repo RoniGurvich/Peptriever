@@ -43,17 +43,16 @@ class TrainParitioner:
         peptide_seq, protein_seq = self._get_seqs(pdb_id, peptide_chain, protein_chain)
         return any(
             [
-                (pdb_id, peptide_chain) in self.excluded_protein_names,
-                (pdb_id, protein_chain) in self.excluded_protein_names,
-                peptide_seq in self.excluded_sequences,
-                protein_seq in self.excluded_sequences,
+                (pdb_id, protein_chain, pdb_id, peptide_chain)
+                in self.excluded_protein_names,
+                peptide_seq + protein_seq in self.excluded_sequences,
             ]
         )
 
     def _get_seqs(self, pdb_id, peptide_chain, protein_chain):
         peptide_seq = self.pdb_lookup.get((pdb_id, peptide_chain))
         protein_seq = self.pdb_lookup.get((pdb_id, protein_chain))
-        return peptide_seq, protein_seq
+        return peptide_seq or "", protein_seq or ""
 
     def _get_genes(self, pdb_id, peptide_chain, protein_chain):
         peptide_gene = self.pdb_to_gene.get((pdb_id, peptide_chain), [""])[0]
@@ -62,8 +61,14 @@ class TrainParitioner:
 
     def read_excluded_sequences(self) -> Set[str]:
         excluded_sequences = set()
-        for pdb_id, chain in self.excluded_protein_names:
-            seq = self.pdb_lookup.get((pdb_id, chain))
-            if seq:
-                excluded_sequences.update([seq])
+        for (
+            prot_pdb_id,
+            prot_chain,
+            pep_pdb_id,
+            pep_chain,
+        ) in self.excluded_protein_names:
+            prot_seq = self.pdb_lookup.get((prot_pdb_id, prot_chain))
+            pep_seq = self.pdb_lookup.get((pep_pdb_id, pep_chain))
+            if prot_seq and pep_seq:
+                excluded_sequences.update([pep_seq + prot_seq])
         return excluded_sequences
