@@ -98,7 +98,7 @@ class IndexBuilder:
             msg = f"extracting vectors {extractor_i}"
             for entry in tqdm(extractor, desc=msg):
                 index_i = entry["index_i"]
-                full_index = indexes[("PDB", index_i)]
+                full_index = indexes[("All Species", index_i)]
                 full_index.insert_vector(entry)
 
                 organism = entry["organism"]
