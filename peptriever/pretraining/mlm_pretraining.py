@@ -4,7 +4,6 @@ from datetime import datetime
 from typing import Optional
 
 import torch.optim
-from torch.utils.data import DataLoader
 from transformers import BertConfig, BertForMaskedLM, Trainer, TrainingArguments
 
 from peptriever.acceleration import compile_model
@@ -110,37 +109,6 @@ def get_model(config, max_length, resume_training: Optional[str]):
             str(config.models_dir / resume_training)
         )
     return model
-
-
-def get_dataloaders(tokenizer_path, seq_repo_name, max_length, mask_token, batch_size):
-    n_workers = os.cpu_count() or 1
-    train_dataset = MaskedLMDataset(seq_repo_name=seq_repo_name, train_part="train")
-    train_collator = MLMCollator(
-        tokenizer_path=tokenizer_path,
-        mask_token=mask_token,
-        max_length=max_length,
-    )
-    train_dataloader = DataLoader(
-        train_dataset,
-        num_workers=n_workers,
-        shuffle=True,
-        collate_fn=train_collator,
-        batch_size=batch_size,
-    )
-    val_dataset = MaskedLMDataset(seq_repo_name=seq_repo_name, train_part="val")
-    val_collator = MLMCollator(
-        tokenizer_path=tokenizer_path,
-        mask_token=mask_token,
-        max_length=max_length,
-    )
-    val_dataloader = DataLoader(
-        val_dataset,
-        num_workers=n_workers,
-        shuffle=False,
-        collate_fn=val_collator,
-        batch_size=batch_size,
-    )
-    return train_dataloader, val_dataloader
 
 
 if __name__ == "__main__":

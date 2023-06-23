@@ -10,9 +10,7 @@ from peptriever.pretraining.load_tokenizer import load_local_tokenizer
 def push_tokenizer_to_hf(config: PretrainingConfig):
     fast_tokenizer = load_local_tokenizer(config.tokenizer_path)
     repo_id = config.hf_tokenizer_repo
-    fast_tokenizer.push_to_hub(  # pylint: disable=not-callable
-        repo_id=repo_id, private=False
-    )
+    fast_tokenizer.push_to_hub(repo_id=repo_id, private=False)
     template_path = _get_template_path()
 
     card = ModelCard.from_template(
