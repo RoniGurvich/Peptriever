@@ -50,10 +50,10 @@ flowchart TD
     end
     
     subgraph training[Training]
-        pretrained_mlm --> train_siamese{{Train Siamese Transformers}}
-        binding_sequences --> train_siamese
-        train_siamese --> trained_model[Trained Model]
-        click trained_model "https://huggingface.co/ronig/siamese_protein_bert" "huggingface model"
+        pretrained_mlm --> finetune{{Finetune Models}}
+        binding_sequences --> finetune
+        finetune --> trained_model[Trained Model]
+        click trained_model "https://huggingface.co/ronig/protein_biencoder" "huggingface model"
     end
     
     subgraph indexing[Indexing]
@@ -61,7 +61,7 @@ flowchart TD
         pdb_sequences --> build_index
         build_index --> knn_index[(Index)]
         knn_index --> publish_index_model{{Publish Index and Model}}
-        click knn_index "https://huggingface.co/datasets/ronig/siamese_protein_index" "huggingface dataset"
+        click knn_index "https://huggingface.co/datasets/ronig/protein_index" "huggingface dataset"
     end
 
     publish_index_model --> search_app((Search App))

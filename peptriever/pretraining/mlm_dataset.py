@@ -26,7 +26,7 @@ class MaskedLMDataset(Dataset):
 
 
 class MLMCollator:
-    def __init__(  # pylint: disable=too-many-arguments
+    def __init__(
         self,
         tokenizer_path: Path,
         mask_token: str,

@@ -4,21 +4,21 @@ from datetime import datetime
 from typing import Optional
 
 import torch.optim
-from torch.utils.data import DataLoader
 from transformers import BertConfig, BertForMaskedLM, Trainer, TrainingArguments
 
 from peptriever.acceleration import compile_model
 from peptriever.pretraining.config import PretrainingConfig
 from peptriever.pretraining.load_tokenizer import load_local_tokenizer
 from peptriever.pretraining.mlm_dataset import MLMCollator, MaskedLMDataset
+from peptriever.reproducibility import set_seed
 
 
 @dataclass
 class MLMConfig:
     batch_size: int = 24
-    epochs: int = 10
+    epochs: int = 20
     lr: float = 1e-5
-    steps_interval: int = 5_000
+    steps_interval: int = 10_000
     resume_training: Optional[str] = None
     n_workers: int = os.cpu_count() or 1
 
@@ -39,7 +39,7 @@ def pretrain_mlm_multiple_models(config: PretrainingConfig, mlm_config: MLMConfi
 
 
 def pretrain_mlm_single_model(config, mlm_config: MLMConfig, model_name, max_length):
-    torch.manual_seed(999)
+    set_seed(seed=999)
     model = get_model(
         config, max_length=max_length, resume_training=mlm_config.resume_training
     )
@@ -90,7 +90,7 @@ def pretrain_mlm_single_model(config, mlm_config: MLMConfig, model_name, max_len
     except KeyboardInterrupt:
         print("Stopped manually")
 
-    model.save_pretrained(output_dir=model_path)
+    model.save_pretrained(model_path)
 
 
 def get_model(config, max_length, resume_training: Optional[str]):
@@ -109,37 +109,6 @@ def get_model(config, max_length, resume_training: Optional[str]):
             str(config.models_dir / resume_training)
         )
     return model
-
-
-def get_dataloaders(tokenizer_path, seq_repo_name, max_length, mask_token, batch_size):
-    n_workers = os.cpu_count() or 1
-    train_dataset = MaskedLMDataset(seq_repo_name=seq_repo_name, train_part="train")
-    train_collator = MLMCollator(
-        tokenizer_path=tokenizer_path,
-        mask_token=mask_token,
-        max_length=max_length,
-    )
-    train_dataloader = DataLoader(
-        train_dataset,
-        num_workers=n_workers,
-        shuffle=True,
-        collate_fn=train_collator,
-        batch_size=batch_size,
-    )
-    val_dataset = MaskedLMDataset(seq_repo_name=seq_repo_name, train_part="val")
-    val_collator = MLMCollator(
-        tokenizer_path=tokenizer_path,
-        mask_token=mask_token,
-        max_length=max_length,
-    )
-    val_dataloader = DataLoader(
-        val_dataset,
-        num_workers=n_workers,
-        shuffle=False,
-        collate_fn=val_collator,
-        batch_size=batch_size,
-    )
-    return train_dataloader, val_dataloader
 
 
 if __name__ == "__main__":
