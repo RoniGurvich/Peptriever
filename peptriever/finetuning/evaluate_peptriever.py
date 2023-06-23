@@ -123,14 +123,14 @@ def plot_roc(y_pred, y_true):
     RocCurveDisplay.from_predictions(y_true, y_pred)
     plt.xscale("log")
     plt.grid("on")
-    plt.title("Siamese Transformers ROC")
+    plt.title("Peptriever ROC")
     plt.savefig("test_roc.png")
 
 
 def plot_precision_recall(y_pred, y_true):
     PrecisionRecallDisplay.from_predictions(y_true, y_pred)
     plt.grid("on")
-    plt.title("Siamese Transformers Precision Recall")
+    plt.title("Peptriever Precision Recall")
     plt.savefig("test_pr.png")
 
 
