@@ -87,8 +87,9 @@ Peptriever is a Bi Encoder Bert model, combined with a Byte-Pair Encoding tokeni
 flowchart TD
     protein_sequence[Protein Sequence] --> protein_encoder[Protein BERT] --> protein_vector[Protein Vector]
     peptide_sequence[Peptide Sequence] --> peptide_encoder[Peptide BERT] --> peptide_vector[Peptide Vector]
-    peptide_vector --> euclidean[Euclidean Distance <--> Binding Score] 
+    peptide_vector --> euclidean[Euclidean Distance == Binding Score] 
     protein_vector --> euclidean
+
 ```
 
 ### Evaluation Results
