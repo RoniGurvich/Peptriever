@@ -10,16 +10,13 @@ This repo contains all the code needed in order to train Peptriever end to end.
 
 ## Local Setup
 
-The dependencies are managed using [Poetry](https://python-poetry.org/). Make sure you
-install poetry using `pipx` or
-the [official instructions](https://python-poetry.org/docs/#installing-with-the-official-installer)
+The dependencies are managed using [Poetry](https://python-poetry.org/).
+
+You can set up your local virtual environment with all the dependencies by running:
 
 ```bash
-pipx install poetry
+make setup
 ```
-
-After Poetry is installed you can run `make setup` to install all the requirements in a
-virtual environment.
 
 ## System Architecture Diagram
 
