@@ -1,5 +1,6 @@
 # Peptriever
 
+[![demo](https://img.shields.io/badge/Demo-https://peptriever.app-blue)](https://peptriever.app)
 [![CI](https://github.com/RoniGurvich/Peptriever/actions/workflows/ci.yml/badge.svg)](https://github.com/RoniGurvich/Peptriever/actions/workflows/ci.yml)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
