@@ -6,7 +6,7 @@ from peptriever.data_sources.binding.config import BindingDataConfig
 from peptriever.data_sources.binding.huang import get_huang_training_samples
 from peptriever.data_sources.binding.train_partitioner import TrainParitioner
 from peptriever.data_sources.binding.yapp import get_yapp_training_samples
-from peptriever.data_sources.propedia import get_propedia_training_samples
+from peptriever.data_sources.binding.propedia import get_propedia_training_samples
 
 
 def preprocess_binding_training_set(

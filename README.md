@@ -1,16 +1,21 @@
-# Peptriever - Official Implementation
+# Peptriever
 
+[![demo](https://img.shields.io/badge/Demo-https://peptriever.app-blue)](https://peptriever.app)
 [![CI](https://github.com/RoniGurvich/Peptriever/actions/workflows/ci.yml/badge.svg)](https://github.com/RoniGurvich/Peptriever/actions/workflows/ci.yml)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-## Model Architecture
+## About
 
-```mermaid
-flowchart TD
-    protein_sequence[Protein Sequence] --> protein_encoder[Protein BERT] --> protein_vector[Protein Vector]
-    peptide_sequence[Peptide Sequence] --> peptide_encoder[Peptide BERT] --> peptide_vector[Peptide Vector]
-    peptide_vector --> euclidean[Euclidean Distance == Binding Score] 
-    protein_vector --> euclidean
+This repo contains all the code needed in order to train Peptriever end to end.
+
+## Local Setup
+
+The dependencies are managed using [Poetry](https://python-poetry.org/).
+
+You can set up your local virtual environment with all the dependencies by running:
+
+```bash
+make setup
 ```
 
 ## System Architecture Diagram
@@ -65,6 +70,29 @@ flowchart TD
     end
 
     publish_index_model --> search_app((Search App))
-    click search_app "https://huggingface.co/spaces/ronig/protein_binding_search" "huggingface space"
+    click search_app "https://peptriever.app" "Peptriever App"
 
 ```
+
+## Model Details
+
+### Model Architecture
+
+Peptriever is a Bi Encoder Bert model, combined with a Byte-Pair Encoding tokenizer.
+
+```mermaid
+flowchart TD
+    protein_sequence[Protein Sequence] --> protein_encoder[Protein BERT] --> protein_vector[Protein Vector]
+    peptide_sequence[Peptide Sequence] --> peptide_encoder[Peptide BERT] --> peptide_vector[Peptide Vector]
+    peptide_vector --> euclidean[Euclidean Distance == Binding Score] 
+    protein_vector --> euclidean
+
+```
+
+### Evaluation Results
+
+The model was evaluated on the test set
+from [Johansson-Akhe et al.](https://www.frontiersin.org/articles/10.3389/fbinf.2022.959160/full)
+
+![Precision-Recall](./doc/img/test_pr.png)
+![ROC](./doc/img/test_roc.png)

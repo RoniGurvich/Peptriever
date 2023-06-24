@@ -2,7 +2,7 @@ from pathlib import Path
 from typing import Set
 
 from peptriever.data_sources.binding.binding_test_set import read_excluded_pdbs
-from peptriever.data_sources.local_pdb import get_pdb_to_gene
+from peptriever.data_sources.binding.local_pdb import get_pdb_to_gene
 from peptriever.data_sources.protein_transformations import protein_train_part
 from peptriever.pdb_seq_lookup import get_pdb_lookup
 
