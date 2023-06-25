@@ -21,7 +21,7 @@ def extract_pdb_sequences(config: PDBDataConfig):
                 "organism",
                 "sequence",
                 "train_part",
-                "uniprot_id"
+                "uniprot_id",
             ),
         )
         writer.writeheader()
