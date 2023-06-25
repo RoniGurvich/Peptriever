@@ -15,6 +15,8 @@ def publish_biencoder(config: IndexingConfig, model_name: str):
     repo_id = config.hf_model_repo
     api.create_repo(repo_id=repo_id, exist_ok=True, private=True, repo_type="model")
     tokenizer = AutoTokenizer.from_pretrained(config.hf_tokenizer_repo)
+    BiEncoder.register_for_auto_class("AutoModel")
+    BiEncoder.config_class.register_for_auto_class()
     model = BiEncoder.from_pretrained(str(config.models_path / model_name))
 
     template_path = _get_template_path()

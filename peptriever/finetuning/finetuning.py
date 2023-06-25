@@ -17,8 +17,12 @@ from peptriever.finetuning.peptriever_trainiing_session import (
     PeptrieverTrainingSession,
     SessionParams,
 )
-from peptriever.model.bert_embedding import BertEmbeddingConfig, BertForEmbedding
-from peptriever.model.bi_encoder import BiEncoderConfig, BiEncoderWithMaskedLM
+from peptriever.model.bi_encoder import (
+    BertEmbeddingConfig,
+    BertForEmbedding,
+    BiEncoderConfig,
+    BiEncoderWithMaskedLM,
+)
 
 
 @dataclass
