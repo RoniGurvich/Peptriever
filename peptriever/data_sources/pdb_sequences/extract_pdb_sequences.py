@@ -21,6 +21,7 @@ def extract_pdb_sequences(config: PDBDataConfig):
                 "organism",
                 "sequence",
                 "train_part",
+                "uniprot_id"
             ),
         )
         writer.writeheader()
@@ -37,7 +38,7 @@ def extract_pdb_sequences(config: PDBDataConfig):
 
 def get_uniprot_metadata(uniprot_meta_path: Path):
     metadata = pd.read_csv(str(uniprot_meta_path), delimiter="\t")[
-        ["From", "Protein names", "Gene Names", "Organism"]
+        ["From", "Protein names", "Gene Names", "Organism", "Entry"]
     ]
     meta_lookup = {}
     for row in metadata.to_dict("records"):
@@ -52,9 +53,11 @@ def process_fasta_entry(record, uniprot_lookup, val_ratio, test_ratio):
     if meta is None:
         genes = ""
         organism = ""
+        uniprot_id = ""
     else:
         genes = meta["Gene Names"]
         organism = meta["Organism"]
+        uniprot_id = meta["Entry"]
         if not isinstance(genes, str):
             genes = ""
     train_part = protein_train_part(
@@ -65,6 +68,7 @@ def process_fasta_entry(record, uniprot_lookup, val_ratio, test_ratio):
     record["train_part"] = train_part
     record["genes"] = genes
     record["organism"] = organism.title()
+    record["uniprot_id"] = uniprot_id
     return record
 
 
