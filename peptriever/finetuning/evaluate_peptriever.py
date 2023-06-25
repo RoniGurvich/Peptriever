@@ -1,4 +1,5 @@
 import csv
+import json
 
 import numpy as np
 import torch
@@ -55,6 +56,8 @@ def evaluate_binding(config: FinetuningConfig, model_name: str):
 
     plot_roc(y_pred, y_true)
     plot_precision_recall(y_pred, y_true)
+
+    save_coords(y_pred, y_true)
 
 
 def load_pretrained_model_and_tokenizer(config, model_name):
@@ -143,6 +146,19 @@ def get_y_pred_y_true(neg_preds, pos_preds):
     distances = np.array(pos_dist + neg_dist)
     y_pred = 1 - distances / np.max(distances)
     return y_pred, y_true
+
+
+def save_coords(y_pred, y_true):
+    fpr, tpr, _ = metrics.roc_curve(y_true, y_pred)
+    precision, recall, _ = metrics.precision_recall_curve(y_true, y_pred)
+    values = {
+        "fpr": fpr.tolist(),
+        "tpr": tpr.tolist(),
+        "precision": precision.tolist(),
+        "recall": recall.tolist(),
+    }
+    with open("curves.json", "w") as f:
+        json.dump(values, f)
 
 
 if __name__ == "__main__":
