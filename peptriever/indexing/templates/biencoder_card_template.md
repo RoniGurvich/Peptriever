@@ -5,10 +5,14 @@ datasets:
 ---
 # Protein BiEncoder Bert Model
 
-Usage
+Usage:
+
 ```python
+import torch
+from transformers import AutoModel, AutoTokenizer
+
 tokenizer = AutoTokenizer.from_pretrained("{{  model_repo  }}")
-model = BiEncoder.from_pretrained("{{  model_repo  }}")
+model = AutoModel.from_pretrained("{{  model_repo  }}", trust_remote_code=True)
 model.eval()
 
 peptide_sequence = "AAA"
