@@ -3,9 +3,12 @@
 datasets:
 - {{  dataset  }}
 ---
-# Protein BiEncoder Bert Model
+## Peptriever BiEncoder for Protein-Peptide Binding
+The model and training process is outlined in [this application note](). Training code can be found [here](https://github.com/RoniGurvich/Peptriever). 
 
-Usage:
+For more details see the [application page](https://peptriever.app) 
+
+## Usage
 
 ```python
 import torch
@@ -27,4 +30,5 @@ with torch.no_grad():
 print("distance: ", torch.norm(peptide_output - protein_output, p=2))
 ```
 
+## Version
 Model checkpint: `{{ model_id }}`
