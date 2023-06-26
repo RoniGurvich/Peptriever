@@ -13,4 +13,5 @@ def publish_pdb_index(hf_index_repo, index_path: Path):
         repo_id=hf_index_repo,
         repo_type="dataset",
         allow_patterns=["*.ann", "*.json"],
+        delete_patterns="*",
     )

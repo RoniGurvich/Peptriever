@@ -16,7 +16,7 @@ class IndexingConfig:
     encoded_sequence_dims: int = 128
     distance_function: str = "euclidean"
 
-    min_indexed_entries: int = 1_000
+    min_indexed_entries: int = 5_000
 
     local_indexes_path: Path = Path("/data/indexes/")
 
