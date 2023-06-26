@@ -24,3 +24,7 @@ class IndexingConfig:
     hf_model_repo: str = "ronig/protein_biencoder"
     hf_index_repo: str = "ronig/protein_index"
     hf_demo_space: str = "ronig/protein_binding_search"
+
+    milvus_db_name: str = "Protein"
+    milvus_collection_name: str = "Peptriever"
+    milvus_insert_batch_size: int = 1000
