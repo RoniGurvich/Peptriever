@@ -37,7 +37,7 @@ class MilvusIndexBuilder:
                         entry["uniprot_id"] is not None,
                     ]
                 ):
-                    entry["is_peptide"] = entry.pop('index_i') == 0
+                    entry["is_peptide"] = entry.pop("index_i") == 0
                     batch.append(entry)
 
                 if len(batch) >= self.insert_batch_size:

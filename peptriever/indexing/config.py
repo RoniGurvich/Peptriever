@@ -25,6 +25,7 @@ class IndexingConfig:
     hf_index_repo: str = "ronig/protein_index"
     hf_demo_space: str = "ronig/protein_binding_search"
 
+    milvus_uri = "https://in03-ddab8e9a5a09fcc.api.gcp-us-west1.zillizcloud.com"
     milvus_db_name: str = "Protein"
     milvus_collection_name: str = "Peptriever"
     milvus_insert_batch_size: int = 1000
