@@ -64,9 +64,8 @@ flowchart TD
     subgraph indexing[Indexing]
         trained_model --> build_index{{Build Index}}
         pdb_sequences --> build_index
-        build_index --> knn_index[(Index)]
-        knn_index --> publish_index_model{{Publish Index and Model}}
-        click knn_index "https://huggingface.co/datasets/ronig/protein_index" "huggingface dataset"
+        build_index --> vector_db[(Vector Database)]
+        vector_db --> publish_index_model{{Publish Index and Model}}
     end
 
     publish_index_model --> search_app((Search App))
