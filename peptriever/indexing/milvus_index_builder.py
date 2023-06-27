@@ -50,6 +50,7 @@ class MilvusIndexBuilder:
     def build_milvus_index(self):
         index_params = {"index_type": "AUTOINDEX", "metric_type": "L2", "params": {}}
         self.collection.create_index(field_name="vector", index_params=index_params)
+        self.collection.load()
 
     def setup_vector_extractors(self):
         n_workers = os.cpu_count() or 1
@@ -114,6 +115,16 @@ class MilvusIndexBuilder:
             min_seq_length=25,
             max_seq_length=int(1e6),
         )
+
+    def get_organisms(self, min_prots: int = 1000):
+        prot_dataset = self.get_prot_dataset()
+        organism_counts = prot_dataset.organism_counts
+        organisms = [
+            organism
+            for organism, count in organism_counts.items()
+            if count >= min_prots
+        ]
+        return organisms
 
 
 def extract_vectors(forward: Callable, dataloader: DataLoader, device, index_i):
