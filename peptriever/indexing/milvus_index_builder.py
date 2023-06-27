@@ -7,7 +7,7 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 
 from peptriever.indexing.config import IndexingConfig
-from peptriever.indexing.annoy_index_builder import SequenceCollator
+from peptriever.indexing.sequence_collator import SequenceCollator
 from peptriever.indexing.indexing_dataset import PDBChainDataset
 
 
