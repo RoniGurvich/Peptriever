@@ -3,7 +3,7 @@ from huggingface_hub import HfApi
 
 from peptriever.acceleration import get_device
 from peptriever.indexing.config import IndexingConfig
-from peptriever.indexing.index_builder import IndexBuilder
+from peptriever.indexing.annoy_index_builder import IndexBuilder
 from peptriever.indexing.publish_biencoder import publish_biencoder
 from peptriever.indexing.publish_pdb_index import publish_pdb_index
 from peptriever.model.bi_encoder import BiEncoder
