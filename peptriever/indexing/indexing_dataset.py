@@ -1,3 +1,5 @@
+import collections
+
 from torch.utils.data import Dataset
 
 from peptriever.pdb_seq_lookup import get_pdb_lookup_with_meta
@@ -23,6 +25,14 @@ class PDBChainDataset(Dataset):
         record = self.pdb_lookup[(pdb_name, chain_id)]
 
         return {"pdb_name": pdb_name, "chain_id": chain_id, **record}
+
+    @property
+    def organism_counts(self):
+        counter = collections.Counter()
+        counter.update(
+            v["organism"] for v in self.pdb_lookup.values() if v["organism"] is not None
+        )
+        return counter
 
 
 def get_filtered_pdb_lookup(max_seq_length, min_seq_length, pdb_seq_repo):

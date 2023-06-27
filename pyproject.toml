@@ -23,6 +23,7 @@ tensorboard = "^2.13.0"
 annoy = "^1.17.3"
 typer = "^0.9.0"
 accelerate = "^0.20.3"
+pymilvus = "^2.2.12"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.3.0"
