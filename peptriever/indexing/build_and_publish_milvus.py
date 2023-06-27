@@ -25,7 +25,7 @@ def index_to_milvus(model_name: str, milvus_token: str):
 
     index_builder = MilvusIndexBuilder(model=model, config=config)
     index_builder.build_milvus()
-    organisms = index_builder.get_organisms()
+    organisms = index_builder.get_organisms(min_prots=config.min_indexed_entries)
     publish_biencoder(config=config, model_name=model_name)
     upload_organisms_to_hf(organisms, config.hf_demo_space)
 

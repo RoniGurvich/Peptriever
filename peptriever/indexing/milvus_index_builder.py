@@ -29,7 +29,7 @@ class MilvusIndexBuilder:
         for extractor_i, extractor in enumerate(extractors):
             batch = []
             msg = f"extracting vectors {extractor_i}"
-            for entry_i, entry in tqdm(enumerate(extractor), desc=msg):
+            for entry in tqdm(extractor, desc=msg):
                 if all(
                     [
                         entry["genes"] is not None,
@@ -116,7 +116,7 @@ class MilvusIndexBuilder:
             max_seq_length=int(1e6),
         )
 
-    def get_organisms(self, min_prots: int = 1000):
+    def get_organisms(self, min_prots):
         prot_dataset = self.get_prot_dataset()
         organism_counts = prot_dataset.organism_counts
         organisms = [
