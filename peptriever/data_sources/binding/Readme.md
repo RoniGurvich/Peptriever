@@ -10,8 +10,6 @@ to [huggingface hub](https://huggingface.co/datasets/ronig/protein_binding_seque
 
 ## Data Flow
 
-1. Download binding data from both sources
-   using [download_binding_data.sh](./download_binding_data.sh)
-2. Combine the datasets
-   using [prepare_binding_training_set](./prepare_binding_training_set.py)
+1. Download binding data from both sources using [download_binding_data.sh](./download_binding_data.sh)
+2. Combine the datasets using [prepare_binding_training_set](./prepare_binding_training_set.py)
 3. Publish the training set using [publish.py](./publish.py)
