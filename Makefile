@@ -13,6 +13,7 @@ check-formatting:
 static-type-check:
 	poetry run mypy --install-types --non-interactive peptriever
 	poetry run mypy -p peptriever
+	find . -type f -name "*.sh" | xargs poetry run shellcheck
 
 lint-python:
 	poetry run ruff peptriever
