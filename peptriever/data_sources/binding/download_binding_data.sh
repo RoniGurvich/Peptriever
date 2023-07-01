@@ -1,3 +1,4 @@
+#!/bin/bash
 BINDING_DATA_DIR=/data/training_sets/external/binding
 mkdir -p $BINDING_DATA_DIR
 echo "Downloading Pepdb"
