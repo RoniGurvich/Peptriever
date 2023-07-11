@@ -8,31 +8,31 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-tqdm = "^4.65.0"
-pandas = "^2.0.2"
-biopython = "^1.81"
-huggingface-hub = "^0.15.1"
-transformers = "^4.30.2"
-datasets = "^2.13.0"
-jinja2 = "^3.1.2"
-torch = "^2.0.1+cu118"
-torchinfo = "^1.8.0"
-matplotlib = "^3.7.1"
-scikit-learn = "^1.2.2"
-tensorboard = "^2.13.0"
-annoy = "^1.17.3"
-typer = "^0.9.0"
-accelerate = "^0.20.3"
-pymilvus = "^2.2.12"
+tqdm = { version = "^4.65.0", source = "pypi-public" }
+pandas = { version = "^2.0.2", source = "pypi-public" }
+biopython = { version = "^1.81", source = "pypi-public" }
+huggingface-hub = { version = "^0.15.1", source = "pypi-public" }
+transformers = { version = "^4.30.2", source = "pypi-public" }
+datasets = { version = "^2.13.0", source = "pypi-public" }
+jinja2 = { version = "^3.1.2", source = "pypi-public" }
+torch = { version = "^2.0.1+cu118", source = "torch-cu" }
+torchinfo = { version = "^1.8.0", source = "pypi-public" }
+matplotlib = { version = "^3.7.1", source = "pypi-public" }
+scikit-learn = { version = "^1.2.2", source = "pypi-public" }
+tensorboard = { version = "^2.13.0", source = "pypi-public" }
+annoy = { version = "^1.17.3", source = "pypi-public" }
+typer = { version = "^0.9.0", source = "pypi-public" }
+accelerate = { version = "^0.20.3", source = "pypi-public" }
+pymilvus = { version = "^2.2.12", source = "pypi-public" }
 
 [tool.poetry.group.dev.dependencies]
-black = "^23.3.0"
-pytest = "^7.3.2"
-mypy = "^1.3.0"
-vulture = "^2.7"
-ruff = "^0.0.272"
-ipython = "^8.14.0"
-shellcheck-py = "^0.9.0.5"
+black = { version = "^23.3.0", source = "pypi-public" }
+pytest = { version = "^7.3.2", source = "pypi-public" }
+mypy = { version = "^1.3.0", source = "pypi-public" }
+vulture = { version = "^2.7", source = "pypi-public" }
+ruff = { version = "^0.0.272", source = "pypi-public" }
+ipython = { version = "^8.14.0", source = "pypi-public" }
+shellcheck-py = { version = "^0.9.0.5", source = "pypi-public" }
 
 
 [[tool.poetry.source]]
@@ -40,6 +40,11 @@ name = "torch-cu"
 url = "https://download.pytorch.org/whl/cu118"
 default = false
 secondary = true
+
+[[tool.poetry.source]]
+name = "pypi-public"
+url = "https://pypi.org/simple/"
+default = true
 
 [build-system]
 requires = ["poetry-core"]
