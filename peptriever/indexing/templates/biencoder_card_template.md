@@ -3,10 +3,13 @@
 datasets:
 - {{  dataset  }}
 ---
-## Peptriever BiEncoder for Protein-Peptide Binding
-The model and training process is outlined in [this application note](). Training code can be found [here](https://github.com/RoniGurvich/Peptriever). 
+## Peptriever: A Bi-Encoder for large-scale protein-peptide binding search
 
-For more details see the [application page](https://peptriever.app) 
+For training details see our [Application Note](https://www.biorxiv.org/content/10.1101/2023.07.13.548811v1). 
+
+Training code can be found in our [Github repo](https://github.com/RoniGurvich/Peptriever). 
+
+A live demo is available on our [application page](https://peptriever.app) 
 
 ## Usage
 
