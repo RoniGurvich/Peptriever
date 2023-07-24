@@ -1,3 +1,4 @@
+import math
 from typing import Dict
 
 import torch
@@ -12,7 +13,10 @@ class EuclideanMarginLoss:
         y1, y2 = outputs["y1"], outputs["y2"]
         all_dist = torch.cdist(y1.double(), y2.double(), p=2)
         pos_dist = torch.diag(all_dist)
-        loss = torch.clip(pos_dist[:, None] - all_dist + self.margin, 0, 1).mean(dim=-1)
+        n_dim = y1.shape[-1]
+        max_dist = 2 * math.sqrt(n_dim)
+        loss = torch.clip(pos_dist[:, None] - all_dist + self.margin, 0, max_dist)
+        loss = loss.fill_diagonal_(0).sum(dim=-1) / (loss.shape[1] - 1)
         return loss.mean()
 
 
