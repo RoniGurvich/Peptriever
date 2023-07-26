@@ -6,7 +6,7 @@ from torch.nn import CrossEntropyLoss
 
 
 class EuclideanMarginLoss:
-    def __init__(self, margin: float = 0.2):
+    def __init__(self, margin: float = 0.05):
         self.margin = margin
 
     def __call__(self, outputs: Dict[str, torch.Tensor], _):
@@ -25,7 +25,7 @@ class EuclideanMarginLoss:
 
 
 class EuclideanCombinedMLMMarginLoss:
-    def __init__(self, margin: float = 0.2, ce_coeff: float = 0.1):
+    def __init__(self, margin: float = 0.05, ce_coeff: float = 0.1):
         self.margin_loss = EuclideanMarginLoss(margin=margin)
         self.ce_coeff = ce_coeff
         self.ce = CrossEntropyLoss()
