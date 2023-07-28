@@ -13,7 +13,7 @@ class FinetuningConfig:
     tokenizer1_max_length = 30
     tokenizer2_max_length = 300
 
-    encoded_sequence_dims: int = 128
+    encoded_sequence_dims: int = 512
     models_path: Path = Path("/data/models")
 
     @property

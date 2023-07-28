@@ -18,7 +18,7 @@ class EuclideanMarginLoss:
         loss = torch.clip(
             pos_dist[:, None] - all_dist + self.margin * max_dist,
             0,
-            max_dist * (1 + self.margin)
+            max_dist * (1 + self.margin),
         )
         loss = loss.fill_diagonal_(0).sum(dim=-1) / (loss.shape[1] - 1)
         return loss.mean()
