@@ -28,15 +28,15 @@ def test_loss_min(n_dim):
     assert torch.eq(loss, 0)
 
 
-@pytest.mark.parametrize("n_dim", [(16)])
-def test_loss_max(n_dim):
+@pytest.mark.parametrize("n_dim,margin", [(16, 0.05)])
+def test_loss_max(n_dim, margin):
     pep1_embeddings = -1 * torch.ones((n_dim,))
     prot1_embeddings = torch.ones((n_dim,))
     pep2_embeddings = torch.ones((n_dim,))
     prot2_embeddings = -1 * torch.ones((n_dim,))
     peps = torch.stack([pep1_embeddings, pep2_embeddings])
     prots = torch.stack([prot1_embeddings, prot2_embeddings])
-    loss_f = EuclideanMarginLoss()
+    loss_f = EuclideanMarginLoss(margin=margin)
     loss = loss_f({"y1": peps, "y2": prots}, None)
-    max_loss = 2 * math.sqrt(n_dim)
+    max_loss = 2 * math.sqrt(n_dim) * (1 + margin)
     assert loss == max_loss
